@@ -1,24 +1,33 @@
-/*----------------------------------------------------------------------------------------
- * Copyright (c) Microsoft Corporation. All rights reserved.
- * Licensed under the MIT License. See LICENSE in the project root for license information.
- *---------------------------------------------------------------------------------------*/
-
 package main
 
-import (
-	"fmt"
-	"hello"
-	"io"
-	"net/http"
-)
+import "fmt"
 
-func handle(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, hello.Hello())
+const spanish = "Spanish"
+const french = "French"
+const englishHelloPrefix = "Hello, "
+const spanishPrefix = "Hola, "
+const frenchPrefix = "Bonjour, "
+
+func Hello(name string, language string) string {
+	if name == "" {
+		name = "World"
+	}
+
+	return greetingPrefix(language) + name
+}
+
+func greetingPrefix(language string) (prefix string) {
+	switch language {
+	case french:
+		prefix = frenchPrefix
+	case spanish:
+		prefix = spanishPrefix
+	default:
+		prefix = englishHelloPrefix
+	}
+	return
 }
 
 func main() {
-	portNumber := "9000"
-	http.HandleFunc("/", handle)
-	fmt.Println("Server listening on port ", portNumber)
-	http.ListenAndServe(":"+portNumber, nil)
+	fmt.Println(Hello("world", "English"))
 }

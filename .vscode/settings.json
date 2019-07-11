@@ -1,4 +1,9 @@
 {
     "go.useLanguageServer": true,
-    "go.inferGopath": true
+    "go.inferGopath": true,
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#3C2739",
+        "titleBar.activeBackground": "#55364F",
+        "titleBar.activeForeground": "#FCFAFB"
+    }
 }
